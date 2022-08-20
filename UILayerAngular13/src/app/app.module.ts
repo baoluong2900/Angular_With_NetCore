@@ -6,15 +6,22 @@ import { AppComponent } from './app.component';
 
 // Cấu hình
 import { HttpClientModule } from '@angular/common/http';
+import { NgbAlertModule, NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+	AppComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
+	BrowserModule,
+	AppRoutingModule,
+	HttpClientModule,
+	NgbModule,
+	NgbPaginationModule,
+	NgbAlertModule,
+	BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
