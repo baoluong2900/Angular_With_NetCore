@@ -32,5 +32,6 @@ namespace DappingAppChat.Data
 		}
 
 		public DbSet<Users> Users { get; set; }
+		public DbSet<dbTest> Tests { get; set; }
 	}
 }

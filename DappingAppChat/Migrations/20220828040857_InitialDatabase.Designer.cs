@@ -3,70 +3,70 @@ using System;
 using DappingAppChat.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace DappingAppChat.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220729064237_creatTable")]
-    partial class creatTable
+    [Migration("20220828040857_InitialDatabase")]
+    partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.7")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("DappingAppChat.Entities.Users", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INT")
+                        .HasColumnType("integer")
                         .HasColumnName("UserId");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("BIT")
+                    b.Property<bool?>("Active")
+                        .HasColumnType("boolean")
                         .HasColumnName("Active");
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("DATETIME")
+                    b.Property<DateTime?>("CreateDate")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("CreateDate");
 
                     b.Property<string>("Email")
                         .HasMaxLength(255)
-                        .HasColumnType("NVARCHAR(255)")
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("Email");
 
                     b.Property<string>("Password")
                         .HasMaxLength(255)
-                        .HasColumnType("NVARCHAR(255)")
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("Password");
 
                     b.Property<byte[]>("PasswordHash")
-                        .HasColumnType("VARBINARY(MAX)")
+                        .HasColumnType("bytea")
                         .HasColumnName("PasswordHash");
 
                     b.Property<byte[]>("PasswordSalt")
-                        .HasColumnType("VARBINARY(MAX)")
+                        .HasColumnType("bytea")
                         .HasColumnName("PasswordSalt");
 
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(15)
-                        .HasColumnType("NVARCHAR(15)")
+                        .HasColumnType("character varying(15)")
                         .HasColumnName("PhoneNumber");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(200)
-                        .HasColumnType("NVARCHAR(200)")
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("UserName");
 
                     b.HasKey("UserId");

@@ -40,5 +40,15 @@ namespace DappingAppChat.Controllers
 		{
 			return await _dataContext.Users.FindAsync(id);
 		}
+
+		[HttpPost]
+		public async Task<ActionResult<Users>> AddUserAsync(Users users)
+		{
+			_dataContext.Users.Add(users);
+			await _dataContext.SaveChangesAsync();
+			//return await _dataContext.Users.ToListAsync();
+			return users;
+		}
+
 	}
 }

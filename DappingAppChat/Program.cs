@@ -4,12 +4,19 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 #region Cấu hình kết nối với sql sever
 
-builder.Services.AddDbContext<DataContext>(options =>
-{
-	options.UseSqlServer(builder.Configuration.GetConnectionString("dbDappingChatsConnection"));
-});
+//builder.Services.AddDbContext<DataContext>(options =>
+//{
+//	options.UseSqlServer(builder.Configuration.GetConnectionString("dbDappingChatsConnection"));
+//});
 
 #endregion Cấu hình kết nối với sql sever
+
+#region Cấu hình kết nối postresql
+builder.Services.AddDbContext<DataContext>(options =>
+{
+	options.UseNpgsql(builder.Configuration.GetConnectionString("dbDappingChatsConnection"));
+});
+#endregion
 builder.Services.AddCors();
 // Add services to the container.
 
